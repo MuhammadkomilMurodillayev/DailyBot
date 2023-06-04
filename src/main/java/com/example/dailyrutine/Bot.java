@@ -41,12 +41,12 @@ public class Bot extends TelegramLongPollingBot {
 
     @Override
     public String getBotUsername() {
-        return "my_daily_rutine_bot";
+        return "";
     }
 
     @Override
     public String getBotToken() {
-        return "6229237423:AAHdKYNGD_5sswmvfmb0N9zPS_TXFA8D_7M";
+        return "";
     }
 
     public int sendMessage(SendMessage sendMessage) {
