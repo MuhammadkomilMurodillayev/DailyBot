@@ -5,6 +5,7 @@ import com.example.dailyrutine.enums.VolumeType;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.Hibernate;
+import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.LocalDateTime;
 import java.util.Objects;
@@ -18,8 +19,8 @@ import java.util.Objects;
 @Setter
 @ToString
 @SequenceGenerator(name = "task_generator", sequenceName = "task_seq")
+@NoArgsConstructor
 public class Task {
-
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "task_generator")
     private Long id;
@@ -29,23 +30,27 @@ public class Task {
     @Column(columnDefinition = "boolean default false")
     private Boolean done;
 
-    @Column(name = "created_at", columnDefinition = "timestamp default now()")
+    @Column(name = "created_at")
+    @CreationTimestamp
     private LocalDateTime createdAt;
+
+    @Column(name = "updated_at", columnDefinition = "timestamp default now()")
+    private LocalDateTime updatedAt;
 
     @Enumerated(value = EnumType.STRING)
     @Column(name = "volume_type", columnDefinition = "varchar default 'MIN'")
     private VolumeType volumeType;
 
-    @Column(name = "plan_count")
+    @Column(name = "plan_count", columnDefinition = "integer default 0")
     private Integer planCount;
 
-    @Column(name = "plan_min")
+    @Column(name = "plan_min", columnDefinition = "bigint default 0")
     private Long planMin;
 
-    @Column(name = "spent_min")
+    @Column(name = "spent_min", columnDefinition = "bigint default 0")
     private Long spentMin;
 
-    @Column(name = "spent_count")
+    @Column(name = "spent_count", columnDefinition = "integer default 0")
     private Integer spentCount;
 
     @Enumerated(value = EnumType.STRING)
@@ -57,8 +62,6 @@ public class Task {
     @Column(name = "user_id")
     private Long userId;
 
-    @Column(name = "updated_at",columnDefinition = "timestamp default now()")
-    private LocalDateTime updatedAt;
 
     @Override
     public boolean equals(Object o) {

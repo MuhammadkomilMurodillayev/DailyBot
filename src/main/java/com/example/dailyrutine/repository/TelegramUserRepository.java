@@ -11,7 +11,9 @@ import java.util.Optional;
  */
 
 @Repository
-public interface UserRepository extends JpaRepository<TelegramUser, Long> {
+public interface TelegramUserRepository extends JpaRepository<TelegramUser, Long> {
 
     Optional<TelegramUser> findByKey(String key);
+
+    Optional<TelegramUser> findByChatId(String chatId);
 }
